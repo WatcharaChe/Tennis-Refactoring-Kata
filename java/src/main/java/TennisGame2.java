@@ -14,10 +14,10 @@ public class TennisGame2 implements TennisGame {
     }
 
     public String getScore() {
+        String score = "";
+        if (isDeuce()) {
 
-        if (isNormal()) {
-
-        } else if (isDeuce()) {
+        } else if (isNormal()) {
 
         } else if (isAdvantage()) {
 
@@ -25,8 +25,7 @@ public class TennisGame2 implements TennisGame {
 
         }
 
-
-        String score = "";
+        
         if (P1point == P2point && P1point < 4) {
             if (P1point == 0)
                 score = "Love";
@@ -102,46 +101,25 @@ public class TennisGame2 implements TennisGame {
         return score;
     }
 
-
-    private boolean isNormal() {
-        if (P1point > 0 && P2point == 0) {
-
-        }
-        if (P2point > 0 && P1point == 0) {
-
-        }
-        if (P1point > P2point && P1point < 4) {
-
-        }
-        if (P2point > P1point && P2point < 4) {
-
-        }
-        return false;
-
+    private String tie(int point) {
+        String[] values = {"Love", "Fifteen", "Thirty", "Forty", "Deuce", "Advantage", "All"};
+        return values[point];
     }
 
     private boolean isDeuce() {
         return (P1point == P2point && P1point >= 3);
     }
 
+    private boolean isNormal() {
+        return (P1point < 4 && P2point < 4);
+    }
+
     private boolean isAdvantage() {
-        if (P1point > P2point && P2point >= 3) {
-
-        }
-        if (P2point > P1point && P1point >= 3) {
-
-        }
-        return false;
+        return (Math.abs(P1point - P2point) == 1);
     }
 
     private boolean isWinner() {
-        if (P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2) {
-
-        }
-        if (P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2) {
-            
-        }
-        return false;
+        return (Math.abs(P1point - P2point) > 1);
     }
 
     public void SetP1Score(int number) {
